@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Interactive Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+   
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <div class="logo">NP</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#portfolio">Work</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Most Welcome!</h1><p id="dynamic-text"></p>
+
+        <script>
+            const textElement = document.getElementById("dynamic-text");
+            const phrases = ["Design", "Develop", "Deliver"];
+            let currentPhraseIndex = 0;
+            let currentCharIndex = 0;
+            let isDeleting = false;
+            let text = "";
+    
+            function typeEffect() {
+                if (isDeleting) {
+                    // Delete one character at a time
+                    text = phrases[currentPhraseIndex].substring(0, currentCharIndex);
+                    currentCharIndex--;
+                } else {
+                    // Add one character at a time
+                    text = phrases[currentPhraseIndex].substring(0, currentCharIndex + 1);
+                    currentCharIndex++;
+                }
+    
+                textElement.innerHTML = text + "<span class='cursor'></span>"; // Add cursor
+    
+                // If the current word is fully typed or erased, toggle the action
+                if (!isDeleting && currentCharIndex === phrases[currentPhraseIndex].length) {
+                    setTimeout(() => {
+                        isDeleting = true;
+                    }, 1000); // Wait 1 second before starting to delete
+                } else if (isDeleting && currentCharIndex === 0) {
+                    isDeleting = false;
+                    currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length; // Loop through phrases
+                }
+    
+                const speed = isDeleting ? 100 : 200; // Adjust speed for typing and deleting
+                setTimeout(typeEffect, speed);
+            }
+    
+            // Start the typing effect
+            typeEffect();
+        </script>
+
+        <a href="#portfolio" class="cta-button">View My Work</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I am a web developer passionate about creating beautiful and functional websites. Let's explore my work!</p>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <h2>My Work</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item" >
+                
+                <h3>Project 1: Personal Portfolio</h3>
+            </div>
+            <div class="portfolio-item">
+             
+                <h3>Project 2: Real-Time Collaborative Coding Platform  </h3>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form class="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 NP. All Rights Reserved.</p>
+        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+    </footer>
+ <script src="script.js"></script>
+</body>
+
+</html>
